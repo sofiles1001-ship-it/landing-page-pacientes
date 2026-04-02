@@ -38,3 +38,36 @@ document.querySelectorAll('.servico-card, .depoimento-card, .sobre-img, .sobre-t
 
 // Log de carregamento para debug
 console.log("Landing Page carregada com sucesso!");
+
+// --- MODO EDITOR VISUAL ---
+// Permite editar textos clicando neles.
+// Para usar: Pressione 'E' no teclado para ativar/desativar o modo de edição.
+
+let isEditMode = false;
+
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'e' && !e.ctrlKey && !e.metaKey) {
+        toggleEditMode();
+    }
+});
+
+function toggleEditMode() {
+    isEditMode = !isEditMode;
+    const editableElements = document.querySelectorAll('h1, h2, h3, p, span, li, .logo');
+    
+    if (isEditMode) {
+        alert("Modo de Edição ATIVADO! Clique em qualquer texto para alterar. Pressione 'E' novamente para desativar.");
+        editableElements.forEach(el => {
+            el.contentEditable = "true";
+            el.style.border = "1px dashed #007bff";
+            el.style.padding = "2px";
+        });
+    } else {
+        alert("Modo de Edição DESATIVADO! As alterações são temporárias nesta visualização. Para salvar permanentemente, edite o arquivo index.html.");
+        editableElements.forEach(el => {
+            el.contentEditable = "false";
+            el.style.border = "none";
+            el.style.padding = "0";
+        });
+    }
+}
